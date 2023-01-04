@@ -40,8 +40,34 @@ app = find_task()
 app.add_task()
 
 app.c.execute('SELECT * FROM tasks')
-rows = app.c.fetchall()
+#rows = app.c.fetchall()
+#
+#for row in app.c.fetchone() in rows:
+#    print(row)
 
-for row in rows:
+rows = app.c.fetchone()
+print(rows)
+rows = app.c.fetchone()
+print(rows)
+
+rows = app.c.fetchone()
+print(rows)
+
+rows = app.c.fetchone()
+print(rows)
+
+rows = app.c.fetchone()
+print(rows)
+
+rows = app.c.fetchone()
+print(rows)
+
+rows = app.c.fetchone()
+print(rows)
+
+rows = app.c.fetchone()
+print(rows)
+
+for row in app.c.execute('SELECT * FROM tasks'):
     print(row)
 app.conn.close()

@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+import sqlite3
+import string
+
+class make_db:
+    def __init__(self):
+        self.conn = sqlite3.connect('sqlite5.db')
+        self.c = self.conn.cursor()
+        self.c.execute('''CREATE TABLE IF NOT EXISTS tasks (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            priority TEXT NOT NULL,
+            );''')
+
+    def add_task(self):
+        tasks = [
+        ('Hacking', 1),
+        ('Swimming', 5),
+        ('Reading',2),
+        ('Nature Walk', 10),
+        ('Jogging', 15),
+        ]
+
+        self.c.execute('INSERT INTO tasks (name, priority) VALUES (?,?)', tasks)
+        self.conn.commit()
+
+    def add_manual_tasks(self):
+        while True:
+            name  = input('Name of the task: ')
+            invalidcharacters= set(string.punctuation)
+            if any(char in invalidcharacters for char in name):
+                print('Invalid characters in name')
+                continue
+            else:
+                break
+            
+        while True:
+            priority = input('Priority of the task: ')
+            try:
+                priority = int(priority)
+            except ValueError:
+                print('Invalid priority')
+                continue
+            else:
+                break
+
+        self.c.execute('INSERT INTO tasks (name, priority) VALUES (?,?)', (name, priority))
+
+        self.conn.commit()
+
+    def show_tasks(self):        
+        for row in self.c.execute('SELECT * FROM tasks'):
+            print(row)
+
+    def delete_task(self):
+        self.c.execute('DELETE FROM tasks WHERE id=?', (1,))
+        self.conn.commit()        
+
+
+
+app = make_db()
+app.add_task()
