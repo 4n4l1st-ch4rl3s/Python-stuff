@@ -3,6 +3,7 @@ import sqlite3
 import string
 
 class make_db:
+    #create database
     def __init__(self):
         self.conn = sqlite3.connect('sqlite5.db')
         self.c = self.conn.cursor()
@@ -12,6 +13,7 @@ class make_db:
             priority TEXT NOT NULL,
             );''')
 
+    #add task
     def add_task(self):
         tasks = [
         ('Hacking', 1),
@@ -24,6 +26,7 @@ class make_db:
         self.c.execute('INSERT INTO tasks (name, priority) VALUES (?,?)', tasks)
         self.conn.commit()
 
+    #manually add task
     def add_manual_tasks(self):
         while True:
             name  = input('Name of the task: ')
@@ -48,15 +51,49 @@ class make_db:
 
         self.conn.commit()
 
+    #show tasks in database
     def show_tasks(self):        
         for row in self.c.execute('SELECT * FROM tasks'):
             print(row)
 
+    #update priority of a task
+    def update_tasks(self):
+        priority = input('Priority of the task: ')
+        try:
+            priority = int(priority)
+        except ValueError:
+            print('Invalid priority')
+            return
+
+        number = input('Id number of the task: ')
+        try:
+            number = int(number)
+        except ValueError:
+            print('Invalid id number')
+            return
+
+        self.c.execute('UPDATE tasks SET priority =? WHERE id =?', (priority,number))
+
+    #delete task
     def delete_task(self):
-        self.c.execute('DELETE FROM tasks WHERE id=?', (1,))
+        number  = input('Number of tasks to delete: ')
+        try:
+            number = int(number)
+        except ValueError:
+            print('Invalid number')
+            return
+        self.c.execute('DELETE FROM tasks WHERE id=?', (number,))
         self.conn.commit()        
 
 
-
+# calls function to create our database
 app = make_db()
+#add our task to the database
 app.add_task()
+#you can add more tasks to the database using the app.add_manual() function
+
+#you can list tasks using the app.list_tasks() function
+
+#you can update tasks using the app.update_tasks()
+
+#you can delete tasks using the app.delete_task()
