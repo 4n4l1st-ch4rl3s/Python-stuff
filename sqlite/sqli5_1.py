@@ -97,3 +97,5 @@ app.add_task()
 #you can update tasks using the app.update_tasks()
 
 #you can delete tasks using the app.delete_task()
+
+app.conn.close()
