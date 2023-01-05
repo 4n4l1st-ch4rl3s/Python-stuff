@@ -98,4 +98,5 @@ app.add_task()
 
 #you can delete tasks using the app.delete_task()
 
+#closes the database connection with app.conn.close()
 app.conn.close()
