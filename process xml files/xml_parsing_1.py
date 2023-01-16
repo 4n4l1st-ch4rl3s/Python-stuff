@@ -14,3 +14,11 @@ print('The root has the following children: ')
 for child in root:
     print(child.tag, child.attrib)
 
+print('\n')
+print('\n')
+
+print('My books: \n')
+for book in root:
+    print('Title: ', book.attrib['title'])
+    print('Author: ', book[0].text)
+    print('Year: ', book[1].text, '\n')
