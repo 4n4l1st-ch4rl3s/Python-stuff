@@ -28,3 +28,12 @@ for book in root:
     print('Title: ', book.attrib['title'])
     print('Author: ', book[0].text)
     print('Year: ', book[1].text, '\n')
+
+# Display the author only
+for author in root.iter('author'):
+    print(author.text)
+    print('\n')
+
+#get book titles
+for book in root.findall('book'):
+    print(book.get('title'))
