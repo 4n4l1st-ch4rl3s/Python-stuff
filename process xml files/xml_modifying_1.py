@@ -7,3 +7,14 @@ for child in root:
     print(child.tag, child.attrib)
     for sub_child in child:
         print(sub_child.tag,':', sub_child.text)
+
+#remove unneccessary prints
+for child in root:
+    child.tag = 'movie'
+    child.remove(child.find('author'))
+    child.remove(child.find('year'))
+    # print('\n')
+    print(child.tag, child.attrib)
+        
+    for sub_child in child:   
+        print(sub_child.tag,':', sub_child.text)
