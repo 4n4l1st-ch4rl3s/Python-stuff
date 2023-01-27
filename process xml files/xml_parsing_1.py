@@ -34,6 +34,10 @@ for author in root.iter('author'):
     print(author.text)
     print('\n')
 
-#get book titles
+#get book titles using findall
 for book in root.findall('book'):
     print(book.get('title'))
+    print('\n')
+
+#Using find only returns one line
+print(root.find('book').get('title'))
