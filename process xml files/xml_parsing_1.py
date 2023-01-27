@@ -41,3 +41,4 @@ for book in root.findall('book'):
 
 #Using find only returns one line
 print(root.find('book').get('title'))
+
